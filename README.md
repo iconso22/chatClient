@@ -1,4 +1,4 @@
-<img src="http://acer.custhelp.com/euf/rightnow/optimized/1353412097/themes/standard/images/acer/chat.jpg" alt="chatClient" title="chatClient" style="display:block; margin: 10px auto 30px auto;" class="center">
+<img src="http://iconsoapp.altervista.org/blog/wp-content/uploads/2012/11/icon.png" alt="chatClient" title="chatClient" style="display:block; margin: 10px auto 30px auto;" class="center">
 
 chatClient is a delightful chat client written for iOS. It's built on top of [NSStream](https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/Foundation/Classes/NSStream_Class/Reference/Reference.html).
 For example, here's how to connect to the server:
