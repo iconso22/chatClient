@@ -6,7 +6,7 @@
 @end
 
 @implementation ViewController
-@synthesize nicknameText,messageText,messagesTable,nickname;
+@synthesize nicknameText,messageText,messagesTable,nickname,userListTable;
 
 - (void)viewDidLoad
 {
@@ -32,19 +32,24 @@
     [self setBackLogin:nil];
     [super viewDidUnload];
 }
+- (IBAction)askUserList:(id)sender {
+    [self requestUserList];
+}
+
 - (IBAction)SendMessage:(id)sender {
-    [outputStream open];
+   //if I open and close the stream I can send only one message
     NSString *response  = [NSString stringWithFormat:@"msg~%@\n", messageText.text];
 	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
 	[outputStream write:[data bytes] maxLength:[data length]];
     [messageText setText:@""];
-    [outputStream close];
+   
 }
 
 - (IBAction)login:(id)sender {
     NSString *response  = [NSString stringWithFormat:@"nick~%@\n", nickname];
 	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
 	[outputStream write:[data bytes] maxLength:[data length]];
+    
 }
 
 - (IBAction)backWelcomeView:(id)sender {
@@ -67,9 +72,6 @@
 }
 
 - (void)dealloc {
-   
-    
-    
     [super dealloc];
     [messages release];
 }
@@ -146,18 +148,26 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
             
 		case NSStreamEventErrorOccurred:
 			NSLog(@"Can not connect to the host!");
+            
 			break;
             
 		case NSStreamEventEndEncountered:
 			break;
             
-		default:
-			NSLog(@"Unknown event");
+		default:{
+            NSLog(@"Unknown event");
+        }
 	}
     
 }
 - (void) messageReceived:(NSString *)message {
-   	[messages addObject:message];
+   	//se non c'e' un mittente, non visualizzare il messaggio perche' e' un messaggio del server, chiama interpretsServerMessage
+    if([message rangeOfString:@":"].location==NSNotFound){
+        [self interpretsServerMessage:message];
+        return;
+    }
+    
+    [messages addObject:message];
 	[self.messagesTable reloadData];
     if(messages.count>1){
         int lastRowNumber = [messagesTable numberOfRowsInSection:0] - 1;
@@ -172,5 +182,23 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return NO;
 }
 
+-(void)requestUserList{
+    NSString *response  = @"getusr\n";
+	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
+	[outputStream write:[data bytes] maxLength:[data length]];
+}
+
+-(void)interpretsServerMessage:(NSString *)message{
+    NSLog(@"messaggio del server: '%@'",message);
+    if([message hasPrefix:@"~"]){ //allora sto ricevendo la lista degli utenti connessi
+        NSArray *a=[message componentsSeparatedByString:@"~"];
+        NSLog(@"User list:");
+        for(NSString* key in a){
+            [userList addObject:message];
+            NSLog(@"%@",key);
+        }
+        
+    }
+}
 
 @end
