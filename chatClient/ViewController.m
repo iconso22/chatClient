@@ -6,7 +6,7 @@
 @end
 
 @implementation ViewController
-@synthesize nicknameText,messageText,messagesTable,nickname,userListTable;
+@synthesize nicknameText,messageText,messagesTable,nickname,userListTable,a,textToolbar;
 
 - (void)viewDidLoad
 {
@@ -16,6 +16,7 @@
     messages = [[NSMutableArray alloc] init];
     [self login:nil];
      messagesTable.backgroundColor = [UIColor clearColor];
+    
     
 }
 
@@ -30,6 +31,7 @@
     [self setMessageText:nil];
     [self setMessages:nil];
     [self setBackLogin:nil];
+    [self setTextToolbar:nil];
     [super viewDidUnload];
 }
 - (IBAction)askUserList:(id)sender {
@@ -41,6 +43,7 @@
     NSString *response  = [NSString stringWithFormat:@"msg~%@\n", messageText.text];
 	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
 	[outputStream write:[data bytes] maxLength:[data length]];
+   
     [messageText setText:@""];
    
 }
@@ -53,6 +56,8 @@
 }
 
 - (IBAction)backWelcomeView:(id)sender {
+    [outputStream close];
+    [inputStream close];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -83,7 +88,6 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    tableView.backgroundColor = [UIColor clearColor];
 
     NSString *s = (NSString *) [messages objectAtIndex:indexPath.row];
     cell.textLabel.text = s;
@@ -94,9 +98,17 @@
         cell.image=[UIImage imageNamed:@"messages.png"];
     }
   	
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        if([a intValue]==1){
+            cell.textLabel.textColor=[UIColor whiteColor];
+        }
+        else{
+            cell.textLabel.textColor=[UIColor blackColor];
+        }
+        
+    }
 
-    cell.textLabel.textColor=[UIColor whiteColor];
-        cell.textLabel.font = [UIFont fontWithName:@"Gill Sans"size:30 ];
+        cell.textLabel.font = [UIFont fontWithName:@"Heiti TC Light"size:20 ];
        
 	return cell;
     
@@ -113,7 +125,17 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        if([a intValue]==1){
+            return 25;
+        }
+        else{
+            return 40;
+        }
+    }
+    else{
+        return 50;
+    }
 }
 
 
@@ -178,6 +200,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        [textField resignFirstResponder];
+        CGPoint a1=CGPointMake(160, 430);
+        textToolbar.center=a1;
+        return YES;
+    }
     [self SendMessage:nil];
     return NO;
 }
@@ -198,6 +226,12 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
             NSLog(@"%@",key);
         }
         
+    }
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+    CGPoint a1=CGPointMake(160, 223);
+    textToolbar.center=a1;
     }
 }
 

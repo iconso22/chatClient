@@ -40,10 +40,23 @@
     if (nicknameText.text==NULL) {
         return;
     }
-    ViewController *a=[[UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil] instantiateViewControllerWithIdentifier:@"1"];
-    a.nickname=nicknameText.text;
-    a.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:a animated:YES];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+         ViewController *a=[[UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil] instantiateViewControllerWithIdentifier:@"1"];
+        a.nickname=nicknameText.text;
+        a.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
+        [self presentModalViewController:a animated:YES];
+    }
+    else{
+        ViewController *a=[[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"1"];
+        a.nickname=nicknameText.text;
+        a.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
+        NSNumber *b=[NSNumber numberWithInt:1];
+        a.a=b;
+        [self presentModalViewController:a animated:YES];
+    }
+   
+    
 }
 - (void)dealloc {
     
@@ -52,5 +65,8 @@
 - (void)viewDidUnload {
     [self setNickname:nil];
     [super viewDidUnload];
+}
+-(IBAction)textFieldDoneEditing:(id)sender{
+	[sender resignFirstResponder];
 }
 @end

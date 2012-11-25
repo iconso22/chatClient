@@ -16,10 +16,12 @@
     
 
 }
+@property (retain, nonatomic) IBOutlet UIToolbar *textToolbar;
 @property (strong, nonatomic) IBOutlet UITextField *nicknameText;
 @property (retain, nonatomic) IBOutlet UITextField *messageText;
 @property (retain, nonatomic) IBOutlet UITableView *messagesTable;
 @property (retain, nonatomic) IBOutlet UITableView *userListTable;
+@property (retain, nonatomic) NSNumber *a;
 @property (retain, nonatomic) NSString *nickname;
 - (IBAction)askUserList:(id)sender;
 - (IBAction)SendMessage:(id)sender;

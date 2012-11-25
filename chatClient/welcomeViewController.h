@@ -12,5 +12,5 @@
 @interface welcomeViewController : UIViewController
 - (IBAction)accedi:(id)sender;
 @property (retain, nonatomic) IBOutlet UITextField *nicknameText;
-
+-(IBAction)textFieldDoneEditing:(id)sender;
 @end

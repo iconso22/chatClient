@@ -31,6 +31,11 @@
 		E5BD1719165FE7B000D2C62D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5BD16F1165FE7B000D2C62D /* Foundation.framework */; };
 		E5BD1721165FE7B000D2C62D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5BD171F165FE7B000D2C62D /* InfoPlist.strings */; };
 		E5BD1724165FE7B000D2C62D /* chatClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BD1723165FE7B000D2C62D /* chatClientTests.m */; };
+		E5DE93521662C07E000A5683 /* roundText.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DE93511662C07E000A5683 /* roundText.png */; };
+		E5DE93551662CA38000A5683 /* 111-user.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DE93541662CA38000A5683 /* 111-user.png */; };
+		E5DE93571662CA40000A5683 /* 112-group.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DE93561662CA40000A5683 /* 112-group.png */; };
+		E5DE93591662CA5B000A5683 /* 09-chat-2.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DE93581662CA5B000A5683 /* 09-chat-2.png */; };
+		E5DE935B1662CA70000A5683 /* 73-radar.png in Resources */ = {isa = PBXBuildFile; fileRef = E5DE935A1662CA70000A5683 /* 73-radar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +80,11 @@
 		E5BD1720165FE7B000D2C62D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E5BD1722165FE7B000D2C62D /* chatClientTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chatClientTests.h; sourceTree = "<group>"; };
 		E5BD1723165FE7B000D2C62D /* chatClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chatClientTests.m; sourceTree = "<group>"; };
+		E5DE93511662C07E000A5683 /* roundText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = roundText.png; sourceTree = "<group>"; };
+		E5DE93541662CA38000A5683 /* 111-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "111-user.png"; sourceTree = "<group>"; };
+		E5DE93561662CA40000A5683 /* 112-group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group.png"; sourceTree = "<group>"; };
+		E5DE93581662CA5B000A5683 /* 09-chat-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "09-chat-2.png"; sourceTree = "<group>"; };
+		E5DE935A1662CA70000A5683 /* 73-radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "73-radar.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +165,11 @@
 		E5BD16F6165FE7B000D2C62D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E5DE935A1662CA70000A5683 /* 73-radar.png */,
+				E5DE93581662CA5B000A5683 /* 09-chat-2.png */,
+				E5DE93541662CA38000A5683 /* 111-user.png */,
+				E5DE93561662CA40000A5683 /* 112-group.png */,
+				E5DE93511662C07E000A5683 /* roundText.png */,
 				E55E833716603CB60028267E /* orangeButton.png */,
 				E5BD16F7165FE7B000D2C62D /* chatClient-Info.plist */,
 				E5BD16F8165FE7B000D2C62D /* InfoPlist.strings */,
@@ -269,6 +284,11 @@
 				E55E8334166039600028267E /* Im-64.png in Resources */,
 				E55E833616603B960028267E /* text.png in Resources */,
 				E55E833816603CB60028267E /* orangeButton.png in Resources */,
+				E5DE93521662C07E000A5683 /* roundText.png in Resources */,
+				E5DE93551662CA38000A5683 /* 111-user.png in Resources */,
+				E5DE93571662CA40000A5683 /* 112-group.png in Resources */,
+				E5DE93591662CA5B000A5683 /* 09-chat-2.png in Resources */,
+				E5DE935B1662CA70000A5683 /* 73-radar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
