@@ -40,10 +40,18 @@
                                 <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="He8-dW-UbQ">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Login with nickname" id="aAE-HR-cMp"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Login" id="5ng-pf-r9u"/>
+                    <tabBarItem key="tabBarItem" title="Login" image="09-chat-2.png" id="5ng-pf-r9u"/>
                     <connections>
                         <outlet property="nicknameText" destination="vBA-1n-q7L" id="Acl-qZ-GVf"/>
                     </connections>
@@ -75,7 +83,7 @@
                                 <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="s8v-Nn-SyG">
-                                <rect key="frame" x="0.0" y="44" width="768" height="891"/>
+                                <rect key="frame" x="0.0" y="93" width="768" height="556"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -86,21 +94,47 @@
                             <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="d6r-Gh-4b6">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Broadcast chat" id="HUe-wr-V7H"/>
                                 </items>
                             </navigationBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="glS-1O-fGs">
+                                <rect key="frame" x="30" y="52" width="536" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="hg3-W5-Snj" id="XWA-x4-2bv"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bLA-8D-VuX">
+                                <rect key="frame" x="600" y="49" width="89" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="18"/>
+                                <state key="normal" title="Button" backgroundImage="orangeButton.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="SendMessage:" destination="hg3-W5-Snj" eventType="touchUpInside" id="7lc-Kj-Q80"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Chat" id="fTe-UD-TbR"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="112-group.png" id="fTe-UD-TbR"/>
                     <connections>
+                        <outlet property="messageText" destination="glS-1O-fGs" id="X1r-UD-CBt"/>
                         <outlet property="messagesTable" destination="s8v-Nn-SyG" id="3RK-vc-jF1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWe-V9-uMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="655" y="-618"/>
+            <point key="canvasLocation" x="620" y="-635"/>
         </scene>
         <!--View Controller - Users-->
         <scene sceneID="2uc-a2-kLc">
@@ -113,6 +147,7 @@
                             <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="8Og-C1-MOt">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Connected Users" id="VtH-wz-hVf"/>
                                 </items>
@@ -125,7 +160,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Users" id="QEQ-s6-wXa"/>
+                    <tabBarItem key="tabBarItem" title="Users" image="111-user.png" id="QEQ-s6-wXa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KPh-Zf-FRE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -153,6 +188,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="09-chat-2.png" width="24" height="22"/>
+        <image name="111-user.png" width="24" height="21"/>
+        <image name="112-group.png" width="32" height="21"/>
         <image name="orangeButton.png" width="974" height="278"/>
         <image name="text.png" width="794" height="138"/>
     </resources>
@@ -167,6 +205,7 @@
                 <relationship kind="outlet" name="messageText" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="messagesTable" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="nicknameText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textToolbar" candidateClass="UIToolbar"/>
                 <relationship kind="outlet" name="userListTable" candidateClass="UITableView"/>
             </relationships>
         </class>
@@ -174,6 +213,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/welcomeViewController.h"/>
             <relationships>
                 <relationship kind="action" name="accedi:"/>
+                <relationship kind="action" name="textFieldDoneEditing:"/>
                 <relationship kind="outlet" name="nicknameText" candidateClass="UITextField"/>
             </relationships>
         </class>
