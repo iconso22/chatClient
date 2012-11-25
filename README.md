@@ -17,7 +17,8 @@ For example, here's how to connect to the server:
     [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [inputStream open];
     [outputStream open];
-}```
+}
+```
 
 ## How To Get Started
 
