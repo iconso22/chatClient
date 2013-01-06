@@ -23,6 +23,7 @@
 @property (retain, nonatomic) IBOutlet UITableView *userListTable;
 @property (retain, nonatomic) NSNumber *a;
 @property (retain, nonatomic) NSString *nickname;
+@property (retain, nonatomic) NSString *serverAddress;
 - (IBAction)askUserList:(id)sender;
 - (IBAction)SendMessage:(id)sender;
 - (IBAction)login:(id)sender;

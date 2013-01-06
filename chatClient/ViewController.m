@@ -6,7 +6,7 @@
 @end
 
 @implementation ViewController
-@synthesize nicknameText,messageText,messagesTable,nickname,userListTable,a,textToolbar;
+@synthesize nicknameText,messageText,messagesTable,nickname,userListTable,a,textToolbar,serverAddress;
 
 - (void)viewDidLoad
 {
@@ -52,7 +52,6 @@
     NSString *response  = [NSString stringWithFormat:@"nick~%@\n", nickname];
 	NSData *data = [[NSData alloc] initWithData:[response dataUsingEncoding:NSASCIIStringEncoding]];
 	[outputStream write:[data bytes] maxLength:[data length]];
-    
 }
 
 - (IBAction)backWelcomeView:(id)sender {
@@ -64,7 +63,8 @@
 -(void)initNetworkCommunication{
     CFReadStreamRef *readStream;
     CFWriteStreamRef *writeStream;
-    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"home.unname.eu", 1234, &readStream, &writeStream);
+    serverAddress=@"chat.iconsoapps.com";
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)serverAddress, 1234, &readStream, &writeStream);
     inputStream=(NSInputStream *)readStream;
     outputStream=(NSOutputStream *)writeStream;
     [inputStream setDelegate:self];
@@ -86,18 +86,27 @@
     
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 
     NSString *s = (NSString *) [messages objectAtIndex:indexPath.row];
     cell.textLabel.text = s;
-    if([cell.textLabel.text rangeOfString:[NSString stringWithFormat:@"%@:",nickname]].location==NSNotFound){ //messaggio inviato da altri cella di colore rossocell.contentView.backgroundColor=[UIColor redColor];
+    if([cell.textLabel.text rangeOfString:[NSString stringWithFormat:@"%@:",nickname]].location==NSNotFound||[cell.textLabel.text rangeOfString:[NSString stringWithFormat:@"%@: ",nickname]].location==NSNotFound ){ //messaggio inviato da altri cella di colore rossocell.contentView.backgroundColor=[UIColor redColor];
         cell.image=[UIImage imageNamed:@"Im-64.png"];
     }
     else{
         cell.image=[UIImage imageNamed:@"messages.png"];
     }
-  	
+  	NSLog(cell.textLabel.text);
+    NSString *myString = s;
+    NSArray *myWords = [myString componentsSeparatedByCharactersInSet:
+                        [NSCharacterSet characterSetWithCharactersInString:@":"]
+                        ];
+    NSLog([myWords objectAtIndex:0]);
+    
+    
+    cell.detailTextLabel.text=[myWords objectAtIndex:0];
+    cell.detailTextLabel.textColor=[UIColor whiteColor];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         if([a intValue]==1){
             cell.textLabel.textColor=[UIColor whiteColor];
@@ -107,8 +116,9 @@
         }
         
     }
-
-        cell.textLabel.font = [UIFont fontWithName:@"Heiti TC Light"size:20 ];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.userInteractionEnabled = NO;
+        cell.textLabel.font = [UIFont fontWithName:@"Heiti TC Light"size:12 ];
        
 	return cell;
     
@@ -127,10 +137,10 @@
 heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         if([a intValue]==1){
-            return 25;
+            return 50;
         }
         else{
-            return 40;
+            return 50;
         }
     }
     else{
@@ -184,10 +194,10 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 - (void) messageReceived:(NSString *)message {
    	//se non c'e' un mittente, non visualizzare il messaggio perche' e' un messaggio del server, chiama interpretsServerMessage
-    if([message rangeOfString:@":"].location==NSNotFound){
+  /*  if([message rangeOfString:@":"].location==NSNotFound){
         [self interpretsServerMessage:message];
         return;
-    }
+    }*/
     
     [messages addObject:message];
 	[self.messagesTable reloadData];
@@ -202,8 +212,23 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         [textField resignFirstResponder];
-        CGPoint a1=CGPointMake(160, 430);
-        textToolbar.center=a1;
+        CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            if (screenSize.height > 480.0f) {
+                CGPoint a1=CGPointMake(160, 530);
+                textToolbar.center=a1;
+                //messagesTable.bounds=CGRectMake(0, 44, 320, 500);
+                [messagesTable reloadData];
+                
+            } else {
+                CGPoint a1=CGPointMake(160, 430);
+                textToolbar.center=a1;
+            }
+        } else {
+            /*Do iPad stuff here.*/
+        }
+
+       
         return YES;
     }
     [self SendMessage:nil];
@@ -228,10 +253,29 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath{
         
     }
 }
+
+
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-    CGPoint a1=CGPointMake(160, 223);
-    textToolbar.center=a1;
+        CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            if (screenSize.height > 480.0f) {
+                CGPoint a1=CGPointMake(160, 310);
+                textToolbar.center=a1;
+                
+               // messagesTable.bounds=CGRectMake(0, 0, 320, screenSize.height-100);
+                [messagesTable reloadData];
+                             
+            } else {
+                CGPoint a1=CGPointMake(160, 223);
+                textToolbar.center=a1;
+            }
+        } else {
+            /*Do iPad stuff here.*/
+        }
+    
     }
 }
 

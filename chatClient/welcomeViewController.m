@@ -13,7 +13,7 @@
 @end
 
 @implementation welcomeViewController
-@synthesize nicknameText;
+@synthesize nicknameText,servertText;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,19 +37,23 @@
 }
 
 - (IBAction)accedi:(id)sender {
-    if (nicknameText.text==NULL) {
+    if (nicknameText.text.length==0||servertText.text.length==0) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Check your data please" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
         return;
     }
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
          ViewController *a=[[UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:nil] instantiateViewControllerWithIdentifier:@"1"];
         a.nickname=nicknameText.text;
+        a.serverAddress=servertText.text;
         a.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
         [self presentModalViewController:a animated:YES];
     }
     else{
         ViewController *a=[[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil] instantiateViewControllerWithIdentifier:@"1"];
         a.nickname=nicknameText.text;
+        a.serverAddress=servertText.text;
         a.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
         NSNumber *b=[NSNumber numberWithInt:1];
         a.a=b;
@@ -60,10 +64,12 @@
 }
 - (void)dealloc {
     
+    [servertText release];
     [super dealloc];
 }
 - (void)viewDidUnload {
     [self setNickname:nil];
+    [self setServertText:nil];
     [super viewDidUnload];
 }
 -(IBAction)textFieldDoneEditing:(id)sender{

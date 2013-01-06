@@ -13,6 +13,10 @@
     NSOutputStream *outputStream;
     NSMutableArray * messages;
     NSMutableArray *userList;
+    int b;
 }
 @property (retain, nonatomic) IBOutlet UITableView *userListTable;
+- (IBAction)reloadConnectedUser:(id)sender;
+@property (retain, nonatomic) NSString *nickname;
+
 @end
