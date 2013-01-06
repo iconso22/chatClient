@@ -63,7 +63,7 @@
 -(void)initNetworkCommunication{
     CFReadStreamRef *readStream;
     CFWriteStreamRef *writeStream;
-    serverAddress=@"chat.iconsoapps.com";
+   // serverAddress=@"chat.iconsoapps.com";
     CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)serverAddress, 1234, &readStream, &writeStream);
     inputStream=(NSInputStream *)readStream;
     outputStream=(NSOutputStream *)writeStream;
@@ -90,22 +90,39 @@
     }
 
     NSString *s = (NSString *) [messages objectAtIndex:indexPath.row];
-    cell.textLabel.text = s;
-    if([cell.textLabel.text rangeOfString:[NSString stringWithFormat:@"%@:",nickname]].location==NSNotFound||[cell.textLabel.text rangeOfString:[NSString stringWithFormat:@"%@: ",nickname]].location==NSNotFound ){ //messaggio inviato da altri cella di colore rossocell.contentView.backgroundColor=[UIColor redColor];
-        cell.image=[UIImage imageNamed:@"Im-64.png"];
-    }
-    else{
-        cell.image=[UIImage imageNamed:@"messages.png"];
-    }
-  	NSLog(cell.textLabel.text);
-    NSString *myString = s;
-    NSArray *myWords = [myString componentsSeparatedByCharactersInSet:
+    
+    NSArray *myWords = [s componentsSeparatedByCharactersInSet:
                         [NSCharacterSet characterSetWithCharactersInString:@":"]
                         ];
-    NSLog([myWords objectAtIndex:0]);
+    
+    NSDateFormatter *formatter;
+    NSString        *dateString;
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm"];
+    dateString = [formatter stringFromDate:[NSDate date]];
+    
+    if(myWords.count>1){
+      NSString *an = [myWords objectAtIndex:1];
+        cell.textLabel.text=an;
+        
+        cell.detailTextLabel.text=[[NSString alloc]initWithFormat:@" Sent at %@ by: %@",dateString,[myWords objectAtIndex:0] ] ;
+    }
+    else{
+        cell.textLabel.text=s;
+    }
+     cell.textLabel.adjustsFontSizeToFitWidth=YES;
+    if([[myWords objectAtIndex:0] isEqualToString:nickname]){ //messaggio inviato da altri cella di colore rossocell.contentView.backgroundColor=[UIColor redColor];
+         cell.image=[UIImage imageNamed:@"messages.png"];
+    }
+    else{
+        cell.image=[UIImage imageNamed:@"Im-64.png"];
+       
+    }
+  	NSLog(cell.textLabel.text);
+   
+   
     
     
-    cell.detailTextLabel.text=[myWords objectAtIndex:0];
     cell.detailTextLabel.textColor=[UIColor whiteColor];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         if([a intValue]==1){
@@ -118,8 +135,8 @@
     }
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.userInteractionEnabled = NO;
-        cell.textLabel.font = [UIFont fontWithName:@"Heiti TC Light"size:12 ];
-       
+   // cell.textLabel.font = [UIFont fontWithName:@"Heiti TC Light"size:15 ];
+       [cell.textLabel setFont:[UIFont fontWithName:@"Arial-BoldMT" size:17]];
 	return cell;
     
     
@@ -137,7 +154,7 @@
 heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         if([a intValue]==1){
-            return 50;
+            return 40;
         }
         else{
             return 50;

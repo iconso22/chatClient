@@ -145,11 +145,12 @@
     NSString *s = (NSString *) [userList objectAtIndex:indexPath.row];
     cell.textLabel.text = s;
     
-    if([cell.textLabel.text rangeOfString:[NSString stringWithFormat:@"User"]].location==NSNotFound||[cell.textLabel.text rangeOfString:[NSString stringWithFormat:@"null"]].location==NSNotFound){
-        cell.image=[UIImage imageNamed:@"accountGrey.PNG"];
+    if([cell.textLabel.text rangeOfString:[NSString stringWithFormat:@"User"]].location==NSNotFound){
+        if([cell.textLabel.text rangeOfString:[NSString stringWithFormat:@"null"]].location==NSNotFound)
+        cell.image=[UIImage imageNamed:@"accountOrange.PNG"];
     }
     else{
-        cell.image=[UIImage imageNamed:@"accountOrange.PNG"];
+        cell.image=[UIImage imageNamed:@"accountGrey.PNG"];
     }
       	
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
